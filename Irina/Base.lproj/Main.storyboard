@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="8Mh-vI-ZMF">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="ppG-BL-1OJ">
+            <objects>
+                <navigationController id="8Mh-vI-ZMF" sceneMemberID="viewController">
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="YDS-M9-RMA">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="6VT-Wf-hXf" kind="relationship" relationship="rootViewController" id="36F-jq-XVX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rje-ZU-sp4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="85" y="-169"/>
+        </scene>
+        <!--Ma liste-->
+        <scene sceneID="3FY-jP-LH4">
+            <objects>
+                <viewController title="Ma liste" id="6VT-Wf-hXf" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wyC-sh-y1f"/>
+                        <viewControllerLayoutGuide type="bottom" id="hXZ-lC-ciW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dgf-lY-lz6">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F4T-cP-vnW">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <items>
+                                    <barButtonItem title="Ma liste" id="5Tb-GA-RxN"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="m1i-RN-yqE"/>
+                                    <barButtonItem title="Chercher un film" id="bg3-2v-8oh">
+                                        <connections>
+                                            <segue destination="1fl-yu-kvo" kind="show" id="DHH-rk-kEw"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Esl-YD-q0Y">
+                                <rect key="frame" x="0.0" y="64" width="320" height="460"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="F4T-cP-vnW" secondAttribute="trailing" constant="-16" id="0MM-kI-apy"/>
+                            <constraint firstItem="Esl-YD-q0Y" firstAttribute="leading" secondItem="dgf-lY-lz6" secondAttribute="leadingMargin" constant="-16" id="LfV-px-m8W"/>
+                            <constraint firstItem="Esl-YD-q0Y" firstAttribute="top" secondItem="wyC-sh-y1f" secondAttribute="bottom" id="bE9-kX-Xwh"/>
+                            <constraint firstItem="hXZ-lC-ciW" firstAttribute="top" secondItem="F4T-cP-vnW" secondAttribute="bottom" id="f4z-At-qhb"/>
+                            <constraint firstItem="F4T-cP-vnW" firstAttribute="leading" secondItem="dgf-lY-lz6" secondAttribute="leadingMargin" constant="-16" id="fQe-Pc-lWs"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Esl-YD-q0Y" secondAttribute="trailing" constant="-16" id="k96-AU-l5Y"/>
+                            <constraint firstItem="F4T-cP-vnW" firstAttribute="top" secondItem="Esl-YD-q0Y" secondAttribute="bottom" id="kJa-Pl-tBe"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Ma liste" id="vf6-J3-9rH"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iV8-O6-f24" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="869" y="-169"/>
+        </scene>
+        <!--Ajouter un film-->
+        <scene sceneID="Xf1-Jg-0qp">
+            <objects>
+                <viewController title="Ajouter un film" id="1fl-yu-kvo" customClass="SearchViewController" customModule="Irina" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Xw5-0L-8sR"/>
+                        <viewControllerLayoutGuide type="bottom" id="dBd-SK-bxQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bXB-Ic-XXn">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eDK-Ae-gjB">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <items>
+                                    <barButtonItem title="Ma liste" id="zEQ-8p-GE7">
+                                        <connections>
+                                            <segue destination="6VT-Wf-hXf" kind="show" id="efB-8M-fvv"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Rxx-ha-TQh"/>
+                                    <barButtonItem title="Chercher un film" id="J61-X2-nb6"/>
+                                </items>
+                            </toolbar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="vmM-dh-gZq">
+                                <rect key="frame" x="0.0" y="64" width="320" height="460"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="x9x-Fv-zfC" style="IBUITableViewCellStyleDefault" id="Pun-sa-4FZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Pun-sa-4FZ" id="XnK-b1-liK">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="x9x-Fv-zfC">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="1fl-yu-kvo" id="X7n-dI-ae8"/>
+                                    <outlet property="delegate" destination="1fl-yu-kvo" id="lmf-CS-Ajr"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="dBd-SK-bxQ" firstAttribute="top" secondItem="eDK-Ae-gjB" secondAttribute="bottom" id="Cmp-Ss-noi"/>
+                            <constraint firstItem="vmM-dh-gZq" firstAttribute="leading" secondItem="bXB-Ic-XXn" secondAttribute="leadingMargin" constant="-16" id="F1N-fn-7Cg"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="vmM-dh-gZq" secondAttribute="trailing" constant="-16" id="GaN-fH-jYd"/>
+                            <constraint firstItem="vmM-dh-gZq" firstAttribute="top" secondItem="Xw5-0L-8sR" secondAttribute="bottom" id="Hp7-Uu-pFp"/>
+                            <constraint firstItem="eDK-Ae-gjB" firstAttribute="top" secondItem="vmM-dh-gZq" secondAttribute="bottom" id="JVQ-GL-Ukn"/>
+                            <constraint firstItem="eDK-Ae-gjB" firstAttribute="leading" secondItem="bXB-Ic-XXn" secondAttribute="leadingMargin" constant="-16" id="dPd-Lb-roM"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="eDK-Ae-gjB" secondAttribute="trailing" constant="-16" id="fy5-V9-S65"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Chercher un film" id="iY3-0G-KPK"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="movieTable" destination="vmM-dh-gZq" id="6AM-XL-icA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SL2-0E-q9v" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="837" y="563"/>
+        </scene>
+    </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="efB-8M-fvv"/>
+    </inferredMetricsTieBreakers>
+</document>
