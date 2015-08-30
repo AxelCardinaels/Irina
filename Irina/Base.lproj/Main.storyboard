@@ -110,6 +110,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="jkH-f8-61r" kind="show" identifier="showMovie" id="U4D-Gt-bef"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -138,6 +141,41 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SL2-0E-q9v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="837" y="563"/>
+        </scene>
+        <!--Afficher un film-->
+        <scene sceneID="w65-bY-BzU">
+            <objects>
+                <viewController title="Afficher un film" id="jkH-f8-61r" customClass="ShowViewController" customModule="Irina" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Rs5-7G-1Y6"/>
+                        <viewControllerLayoutGuide type="bottom" id="anR-5M-z3N"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pmo-X0-xXe">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PHR-X5-o9g">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <items>
+                                    <barButtonItem title="Ma liste" id="LWh-6X-i71"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="UUn-gs-DUi"/>
+                                    <barButtonItem title="Chercher un film" id="sxV-mn-ccV"/>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="anR-5M-z3N" firstAttribute="top" secondItem="PHR-X5-o9g" secondAttribute="bottom" id="HP8-mp-Ifu"/>
+                            <constraint firstItem="PHR-X5-o9g" firstAttribute="leading" secondItem="pmo-X0-xXe" secondAttribute="leadingMargin" constant="-16" id="MJA-QM-eYT"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="PHR-X5-o9g" secondAttribute="trailing" constant="-16" id="eIm-uY-E5P"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Afficher un film" id="PfC-yG-fxd"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WwY-aA-kCy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="837" y="1279"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

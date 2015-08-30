@@ -15,6 +15,7 @@
 		7797516E1B920EFA0038E234 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7797516C1B920EFA0038E234 /* LaunchScreen.xib */; };
 		7797517A1B920EFB0038E234 /* IrinaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779751791B920EFB0038E234 /* IrinaTests.swift */; };
 		779751841B9215C20038E234 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779751831B9215C20038E234 /* SearchViewController.swift */; };
+		779751861B9309320038E234 /* ShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779751851B9309320038E234 /* ShowViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		779751781B920EFB0038E234 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		779751791B920EFB0038E234 /* IrinaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IrinaTests.swift; sourceTree = "<group>"; };
 		779751831B9215C20038E234 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		779751851B9309320038E234 /* ShowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 				779751601B920EFA0038E234 /* AppDelegate.swift */,
 				779751651B920EFA0038E234 /* ViewController.swift */,
 				779751831B9215C20038E234 /* SearchViewController.swift */,
+				779751851B9309320038E234 /* ShowViewController.swift */,
 				779751671B920EFA0038E234 /* Main.storyboard */,
 				7797516A1B920EFA0038E234 /* Images.xcassets */,
 				7797516C1B920EFA0038E234 /* LaunchScreen.xib */,
@@ -218,6 +221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				779751861B9309320038E234 /* ShowViewController.swift in Sources */,
 				779751661B920EFA0038E234 /* ViewController.swift in Sources */,
 				779751611B920EFA0038E234 /* AppDelegate.swift in Sources */,
 				779751841B9215C20038E234 /* SearchViewController.swift in Sources */,
