@@ -10,26 +10,97 @@ import UIKit
 import CoreData
 
 
-class SearchViewController: UIViewController, UITableViewDelegate {
+class SearchViewController: UIViewController, UITableViewDelegate, UISearchBarDelegate {
     
     @IBOutlet var movieTable: UITableView!
     var movies: NSMutableArray = [];
     var selectedMovie = NSDictionary();
     
+    var searchBar = UISearchBar()
+    
+    
+    //Mise en place de l'interface quand on clique sur la barre de recherche
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        
+        if searchBar.text == ""{
+
+            searchBar.setShowsCancelButton(true, animated: true)
+            
+        }
+        
+    }
+    
+    
+    //Quand la valeur du champ de recherche change, on lance la rehcerche
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchBar.text == ""{
+            
+            
+        }else{
+            let searchString = searchBar.text.stringByReplacingOccurrencesOfString(" ", withString: "+");
+            irina.searchMovies(searchString, completionHandler: {data, error -> Void in
+                
+                if (data != nil) {
+                    self.movies = NSMutableArray(array: data);
+                    dispatch_async(dispatch_get_main_queue(), { self.movieTable.reloadData() })
+                } else {
+                    println("api.getData failed")
+                    println(error)
+                }
+            })
+        }
+        
+     
+    }
+    
+    
+    //On lance la recherche au click sur le bouton "rechercher"
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        self.searchBar.endEditing(true);
+       
+        if searchBar.text == ""{
+
+        }else{
+            let searchString = searchBar.text.stringByReplacingOccurrencesOfString(" ", withString: "+");
+            irina.searchMovies(searchString, completionHandler: {data, error -> Void in
+                
+                if (data != nil) {
+                    self.movies = NSMutableArray(array: data);
+                    dispatch_async(dispatch_get_main_queue(), { self.movieTable.reloadData() })
+                } else {
+                    println("api.getData failed")
+                    println(error)
+                }
+            })
+        }
+    }
+    
+    //Suppression du bouton cancel + bouton suivi activé de nouveau au click sur le bouton annuler de la bar
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        self.searchBar.endEditing(true);
+        searchBar.setShowsCancelButton(false, animated: true);
+        
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.setHidesBackButton(true, animated: true)
+        //Mise en place de la barre de recherche dans la bar de navigation
         
-        irina.searchMovies("mission", completionHandler: {data, error -> Void in
-            
-            if (data != nil) {
-                self.movies = NSMutableArray(array: data);
-                dispatch_async(dispatch_get_main_queue(), { self.movieTable.reloadData() })
-            } else {
-                println("api.getData failed")
-                println(error)
-            }
-        })
+        var colorTextSearchBar = searchBar.valueForKey("searchField") as? UITextField
+        searchBar.sizeToFit()
+        searchBar.searchBarStyle = UISearchBarStyle.Minimal
+        searchBar.placeholder = "Rechercher un film"
+        self.navigationItem.titleView = searchBar;
+        
+        searchBar.keyboardType = UIKeyboardType.URL;
+        searchBar.delegate = self;
         
         // Do any additional setup after loading the view.
     }

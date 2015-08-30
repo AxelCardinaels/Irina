@@ -12,11 +12,14 @@ import CoreData
 
 class irinaApi {
     func searchMovies(search:String, completionHandler: ((NSArray!, NSError!) -> Void)!) -> Void {
-        let url: NSURL = NSURL(string: "https://api.betaseries.com/movies/search?title=\(search)&key=14cbb71a3f03")!
+        var escapedSearch = search.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
+        let url: NSURL = NSURL(string: "https://api.betaseries.com/movies/search?title=\(escapedSearch!)&key=14cbb71a3f03")!
+        
         let ses = NSURLSession.sharedSession()
         let task = ses.dataTaskWithURL(url, completionHandler: {data, response, error -> Void in
             if (error != nil) {
                 return completionHandler(nil, error)
+                
             }
             
             var error: NSError?
@@ -24,6 +27,7 @@ class irinaApi {
             
             if (error != nil) {
                 return completionHandler(nil, error)
+                
             } else {
                 return completionHandler(json["movies"] as! [NSDictionary], nil);
             }

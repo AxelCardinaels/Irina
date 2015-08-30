@@ -39,6 +39,7 @@ class ShowViewController: UIViewController {
     func deleteMovie(){
         
         context.deleteObject(localMovie as! NSManagedObject);
+        self.performSegueWithIdentifier("backToList", sender: AnyObject?());
        
     }
     

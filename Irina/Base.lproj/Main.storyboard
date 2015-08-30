@@ -191,14 +191,17 @@
                     </view>
                     <navigationItem key="navigationItem" title="Afficher un film" id="PfC-yG-fxd"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <segue destination="6VT-Wf-hXf" kind="show" identifier="backToList" id="IQt-RV-mZ5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WwY-aA-kCy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="837" y="1279"/>
+            <point key="canvasLocation" x="837" y="1269"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="36F-jq-XVX"/>
         <segue reference="U4D-Gt-bef"/>
+        <segue reference="IQt-RV-mZ5"/>
     </inferredMetricsTieBreakers>
 </document>
