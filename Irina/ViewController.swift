@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import CoreData
 
 
 class irinaApi {
@@ -50,10 +50,14 @@ class irinaApi {
         })
         task.resume()
     }
+    
+    
 }
 
-var api = irinaApi();
-
+var irina = irinaApi();
+var moviesToWatch = [];
+var appDel:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate;
+var context:NSManagedObjectContext = appDel.managedObjectContext!
 
 class ViewController: UIViewController {
     

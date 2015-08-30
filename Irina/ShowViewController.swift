@@ -7,28 +7,44 @@
 //
 
 import UIKit
+import CoreData
 
 class ShowViewController: UIViewController {
     
     var idToShow = Int();
     var movie = NSDictionary();
     
+    
+    func makeAddButton(){
+        var addButton : UIBarButtonItem = UIBarButtonItem(title: "À regarder", style: UIBarButtonItemStyle.Plain, target: self, action: "addMovie")
+        self.navigationItem.rightBarButtonItem = addButton
+    }
+    
+    func addMovie(){
+
+        
+        var newMovie = NSEntityDescription.insertNewObjectForEntityForName("Movie", inManagedObjectContext: context) as! NSManagedObject;
+        
+        newMovie.setValue(movie["title"] as! String, forKey: "title");
+        context.save(nil);
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        api.showMovie(idToShow, completionHandler: { (data, error) -> Void in
+        irina.showMovie(idToShow, completionHandler: { (data, error) -> Void in
             
             if (data != nil) {
-                println(data);
                 self.movie = data
-                println(self.movie)
                 
             } else {
                 println("api.showMovie failed")
                 println(error)
             }
         })
+        
+        makeAddButton();
     }
     
     override func didReceiveMemoryWarning() {

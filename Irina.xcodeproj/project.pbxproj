@@ -16,6 +16,7 @@
 		7797517A1B920EFB0038E234 /* IrinaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779751791B920EFB0038E234 /* IrinaTests.swift */; };
 		779751841B9215C20038E234 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779751831B9215C20038E234 /* SearchViewController.swift */; };
 		779751861B9309320038E234 /* ShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779751851B9309320038E234 /* ShowViewController.swift */; };
+		779751881B933B7D0038E234 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779751871B933B7C0038E234 /* ListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		779751791B920EFB0038E234 /* IrinaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IrinaTests.swift; sourceTree = "<group>"; };
 		779751831B9215C20038E234 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		779751851B9309320038E234 /* ShowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowViewController.swift; sourceTree = "<group>"; };
+		779751871B933B7C0038E234 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 			children = (
 				779751601B920EFA0038E234 /* AppDelegate.swift */,
 				779751651B920EFA0038E234 /* ViewController.swift */,
+				779751871B933B7C0038E234 /* ListViewController.swift */,
 				779751831B9215C20038E234 /* SearchViewController.swift */,
 				779751851B9309320038E234 /* ShowViewController.swift */,
 				779751671B920EFA0038E234 /* Main.storyboard */,
@@ -223,6 +226,7 @@
 			files = (
 				779751861B9309320038E234 /* ShowViewController.swift in Sources */,
 				779751661B920EFA0038E234 /* ViewController.swift in Sources */,
+				779751881B933B7D0038E234 /* ListViewController.swift in Sources */,
 				779751611B920EFA0038E234 /* AppDelegate.swift in Sources */,
 				779751841B9215C20038E234 /* SearchViewController.swift in Sources */,
 				779751641B920EFA0038E234 /* Irina.xcdatamodeld in Sources */,

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import CoreData
 
 
 class SearchViewController: UIViewController, UITableViewDelegate {
@@ -20,7 +20,7 @@ class SearchViewController: UIViewController, UITableViewDelegate {
         super.viewDidLoad()
         
         
-        api.searchMovies("mission", completionHandler: {data, error -> Void in
+        irina.searchMovies("mission", completionHandler: {data, error -> Void in
             
             if (data != nil) {
                 self.movies = NSMutableArray(array: data);
