@@ -13,7 +13,7 @@ class ListViewController: UIViewController {
     
     
     @IBOutlet var movieToWatchTable: UITableView!
-    var selectedMovie = NSDictionary();
+    var selectedMovie = [String : AnyObject]()
     
     func loadList(){
         var request = NSFetchRequest(entityName: "Movie")
@@ -22,13 +22,13 @@ class ListViewController: UIViewController {
         movieToWatchTable.reloadData();
         
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -53,15 +53,35 @@ class ListViewController: UIViewController {
             cell.textLabel?.text = "No Name"
         }
         
+        cell.textLabel?.numberOfLines = 0;
+        cell.textLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping;
+        
         
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        selectedMovie = moviesToWatch[indexPath.row] as! NSDictionary
+        selectedMovie = [
+            "title" : moviesToWatch[indexPath.row].valueForKey("title") as! String,
+            "id" : moviesToWatch[indexPath.row].valueForKey("id") as! Int
+        ];
         performSegueWithIdentifier("showMovie", sender: AnyObject?())
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "showMovie" {
+            var secondView: ShowViewController = segue.destinationViewController as! ShowViewController
+            
+            secondView.title = selectedMovie["title"]! as? String;
+            secondView.idToShow = (selectedMovie["id"]! as? Int)!;
+            secondView.local = true;
+            
+            
+        }
+        
+    }
     
-
+    
+    
 }

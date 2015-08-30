@@ -56,6 +56,9 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="z3C-73-dVQ" id="ejP-Dk-ef8">
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="jkH-f8-61r" kind="show" identifier="showMovie" id="Sua-Ao-WF7"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -196,5 +199,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="36F-jq-XVX"/>
+        <segue reference="U4D-Gt-bef"/>
     </inferredMetricsTieBreakers>
 </document>

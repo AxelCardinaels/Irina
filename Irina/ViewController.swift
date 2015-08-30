@@ -51,6 +51,20 @@ class irinaApi {
         task.resume()
     }
     
+    func showLocalMovie(id:Int, completionHandler: ((AnyObject, NSError!) -> Void)!) -> Void {
+        
+        var theMovie : AnyObject = "";
+        var request = NSFetchRequest(entityName: "Movie");
+        request.returnsObjectsAsFaults = false;
+        request.predicate = NSPredicate(format: "id = %@", "\(id)");
+        var findMovies = context.executeFetchRequest(request, error: nil)!;
+        
+        for movie in findMovies{
+            theMovie = movie;
+        }
+        
+        return completionHandler(theMovie, nil);
+    }
     
 }
 

@@ -53,6 +53,9 @@ class SearchViewController: UIViewController, UITableViewDelegate {
             cell.textLabel?.text = "No Name"
         }
         
+        cell.textLabel?.numberOfLines = 0;
+        cell.textLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping;
+        
         
         return cell
     }
@@ -68,8 +71,8 @@ class SearchViewController: UIViewController, UITableViewDelegate {
             var secondView: ShowViewController = segue.destinationViewController as! ShowViewController
             
             secondView.idToShow = (selectedMovie["id"] as? Int)!;
-            
             secondView.title = selectedMovie["title"] as? String;
+            secondView.local = false;
             
             
         }
