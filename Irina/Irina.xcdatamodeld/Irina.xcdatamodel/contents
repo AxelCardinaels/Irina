@@ -3,13 +3,18 @@
     <entity name="Movie" syncable="YES">
         <attribute name="author" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="rating" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="releaseDate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ratingFull" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ratingShort" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="releaseDay" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="releaseMonth" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="releaseYear" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="thumbnail" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type2" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Movie" positionX="-63" positionY="-18" width="128" height="150"/>
+        <element name="Movie" positionX="-63" positionY="-18" width="128" height="225"/>
     </elements>
 </model>

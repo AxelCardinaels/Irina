@@ -17,6 +17,7 @@
 		779751841B9215C20038E234 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779751831B9215C20038E234 /* SearchViewController.swift */; };
 		779751861B9309320038E234 /* ShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779751851B9309320038E234 /* ShowViewController.swift */; };
 		779751881B933B7D0038E234 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779751871B933B7C0038E234 /* ListViewController.swift */; };
+		7797518A1B9CE8E90038E234 /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779751891B9CE8E90038E234 /* MovieTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		779751831B9215C20038E234 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		779751851B9309320038E234 /* ShowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowViewController.swift; sourceTree = "<group>"; };
 		779751871B933B7C0038E234 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		779751891B9CE8E90038E234 /* MovieTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 				779751831B9215C20038E234 /* SearchViewController.swift */,
 				779751851B9309320038E234 /* ShowViewController.swift */,
 				779751671B920EFA0038E234 /* Main.storyboard */,
+				779751891B9CE8E90038E234 /* MovieTableViewCell.swift */,
 				7797516A1B920EFA0038E234 /* Images.xcassets */,
 				7797516C1B920EFA0038E234 /* LaunchScreen.xib */,
 				779751621B920EFA0038E234 /* Irina.xcdatamodeld */,
@@ -226,6 +229,7 @@
 			files = (
 				779751861B9309320038E234 /* ShowViewController.swift in Sources */,
 				779751661B920EFA0038E234 /* ViewController.swift in Sources */,
+				7797518A1B9CE8E90038E234 /* MovieTableViewCell.swift in Sources */,
 				779751881B933B7D0038E234 /* ListViewController.swift in Sources */,
 				779751611B920EFA0038E234 /* AppDelegate.swift in Sources */,
 				779751841B9215C20038E234 /* SearchViewController.swift in Sources */,
@@ -359,7 +363,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Irina/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -370,7 +374,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Irina/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

@@ -15,7 +15,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UISearchBarDe
     @IBOutlet var movieTable: UITableView!
     var movies: NSMutableArray = [];
     var selectedMovie = NSDictionary();
-    
     var searchBar = UISearchBar()
     
     
@@ -24,7 +23,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UISearchBarDe
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         
         if searchBar.text == ""{
-
+            
             searchBar.setShowsCancelButton(true, animated: true)
             
         }
@@ -52,7 +51,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UISearchBarDe
             })
         }
         
-     
+        
     }
     
     
@@ -60,9 +59,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UISearchBarDe
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         self.searchBar.endEditing(true);
-       
+        
         if searchBar.text == ""{
-
+            
         }else{
             let searchString = searchBar.text.stringByReplacingOccurrencesOfString(" ", withString: "+");
             irina.searchMovies(searchString, completionHandler: {data, error -> Void in
@@ -99,7 +98,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UISearchBarDe
         searchBar.placeholder = "Rechercher un film"
         self.navigationItem.titleView = searchBar;
         
-        searchBar.keyboardType = UIKeyboardType.URL;
+        searchBar.keyboardType = UIKeyboardType.WebSearch
         searchBar.delegate = self;
         
         // Do any additional setup after loading the view.

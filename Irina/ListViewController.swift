@@ -9,11 +9,11 @@
 import UIKit
 import CoreData
 
-class ListViewController: UIViewController {
+class ListViewController: UIViewController, UITableViewDelegate {
     
     
     @IBOutlet var movieToWatchTable: UITableView!
-    var selectedMovie = [String : AnyObject]()
+    var selectedId = Int()
     
     func loadList(){
         var request = NSFetchRequest(entityName: "Movie")
@@ -25,8 +25,10 @@ class ListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
+        addBlurEffect(self);
+        movieToWatchTable.rowHeight = UITableViewAutomaticDimension
+        movieToWatchTable.estimatedRowHeight = 77.0;
+        self.navigationItem.setHidesBackButton(true, animated: true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -44,37 +46,71 @@ class ListViewController: UIViewController {
     }
     
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
-        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "cell")
+        let cell = tableView.dequeueReusableCellWithIdentifier("movieCell", forIndexPath: indexPath) as! MovieTableViewCell
+        
         
         if let actualMovie = moviesToWatch[indexPath.row].valueForKey("title") as? NSString {
             
-            cell.textLabel?.text = actualMovie as? String
+            cell.movieTitle?.text = actualMovie as? String
+            
+            if let movieDate = moviesToWatch[indexPath.row].valueForKey("releaseYear") as? NSString{
+                cell.movieTitle?.text = "\(actualMovie as! String) (\(movieDate as! String))"
+            }
         } else {
-            cell.textLabel?.text = "No Name"
+            cell.movieTitle?.text = "No Name"
         }
         
-        cell.textLabel?.numberOfLines = 0;
-        cell.textLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping;
+        
+        cell.movieTitle.lineBreakMode = NSLineBreakMode.ByWordWrapping;
+        cell.movieTitle.numberOfLines = 0;
+
+        
+        
+        if let type1 = moviesToWatch[indexPath.row].valueForKey("type1") as? NSString{
+            if let type2 = moviesToWatch[indexPath.row].valueForKey("type2") as? NSString{
+                cell.movieType.text = "\(type1) & \(type2)";
+            }else{
+                cell.movieType.text = type1 as String;
+            }
+        }
+        
+        if let rating = moviesToWatch[indexPath.row].valueForKey("ratingShort") as? NSString{
+            cell.movieRate.text = "\(rating as String)/10";
+        }
+        
+        
+        
+        
+        cell.backgroundColor = UIColor(red: 35/255.0, green: 35/255.0, blue: 35/255.0, alpha: 0.0);
+        
         
         
         return cell
     }
     
+    
+    
+    
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        selectedMovie = [
-            "title" : moviesToWatch[indexPath.row].valueForKey("title") as! String,
-            "id" : moviesToWatch[indexPath.row].valueForKey("id") as! Int
-        ];
+        
+        selectedId = moviesToWatch[indexPath.row].valueForKey("id") as! Int
+        
+        
+        
         performSegueWithIdentifier("showMovie", sender: AnyObject?())
     }
+    
+    
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "showMovie" {
             var secondView: ShowViewController = segue.destinationViewController as! ShowViewController
             
-            secondView.title = selectedMovie["title"]! as? String;
-            secondView.idToShow = (selectedMovie["id"]! as? Int)!;
+
+            secondView.idToShow = selectedId
             secondView.local = true;
             
             
