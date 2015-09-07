@@ -14,6 +14,15 @@ class ListViewController: UIViewController, UITableViewDelegate {
     
     @IBOutlet var movieToWatchTable: UITableView!
     var selectedId = Int()
+    var movieToDelete:AnyObject = "";
+    var refresher : UIRefreshControl = UIRefreshControl()
+    
+    func refreshData(){
+        
+        loadList()
+        movieToWatchTable.reloadData()
+        self.refresher.endRefreshing()
+    }
     
     func loadList(){
         var request = NSFetchRequest(entityName: "Movie")
@@ -29,6 +38,10 @@ class ListViewController: UIViewController, UITableViewDelegate {
         movieToWatchTable.rowHeight = UITableViewAutomaticDimension
         movieToWatchTable.estimatedRowHeight = 77.0;
         self.navigationItem.setHidesBackButton(true, animated: true)
+        
+        //Mise en place du refresh
+        refresher.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
+        movieToWatchTable.addSubview(refresher)
     }
     
     override func didReceiveMemoryWarning() {
@@ -95,10 +108,24 @@ class ListViewController: UIViewController, UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         selectedId = moviesToWatch[indexPath.row].valueForKey("id") as! Int
-        
-        
-        
         performSegueWithIdentifier("showMovie", sender: AnyObject?())
+    }
+    
+    func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
+        
+        selectedId = moviesToWatch[indexPath.row].valueForKey("id") as! Int;
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            irina.showLocalMovie(selectedId, completionHandler: { (data, error) -> Void in
+                self.movieToDelete = data
+                context.deleteObject(self.movieToDelete as! NSManagedObject);
+                context.save(nil);
+                self.loadList();
+                self.movieToWatchTable.reloadData()
+            })
+            
+        }
+        
+      
     }
     
     

@@ -43,6 +43,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UISearchBarDe
                 
                 if (data != nil) {
                     self.movies = NSMutableArray(array: data);
+                    println(self.movies)
                     dispatch_async(dispatch_get_main_queue(), { self.movieTable.reloadData() })
                 } else {
                     println("api.getData failed")
@@ -93,15 +94,21 @@ class SearchViewController: UIViewController, UITableViewDelegate, UISearchBarDe
         //Mise en place de la barre de recherche dans la bar de navigation
         
         var colorTextSearchBar = searchBar.valueForKey("searchField") as? UITextField
+        colorTextSearchBar?.textColor = UIColor.whiteColor()
         searchBar.sizeToFit()
         searchBar.searchBarStyle = UISearchBarStyle.Minimal
         searchBar.placeholder = "Rechercher un film"
         self.navigationItem.titleView = searchBar;
+        addBlurEffect(self);
+        
         
         searchBar.keyboardType = UIKeyboardType.WebSearch
         searchBar.delegate = self;
         
         // Do any additional setup after loading the view.
+        
+        movieTable.rowHeight = UITableViewAutomaticDimension
+        movieTable.estimatedRowHeight = 77.0;
     }
     
     override func didReceiveMemoryWarning() {
@@ -114,18 +121,25 @@ class SearchViewController: UIViewController, UITableViewDelegate, UISearchBarDe
     }
     
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
-        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "cell")
+        let cell = tableView.dequeueReusableCellWithIdentifier("movieCell", forIndexPath: indexPath) as! MovieTableViewCell
         
         if let actualMovie = self.movies[indexPath.row]["title"] as? NSString {
             
-            cell.textLabel?.text = actualMovie as? String
+            cell.movieTitle?.text = actualMovie as? String
         } else {
-            cell.textLabel?.text = "No Name"
+            cell.movieTitle?.text = "No Name"
         }
         
-        cell.textLabel?.numberOfLines = 0;
-        cell.textLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping;
+        cell.movieTitle?.numberOfLines = 0;
+        cell.movieTitle?.lineBreakMode = NSLineBreakMode.ByWordWrapping;
         
+        cell.movieType.text = "Action & Horreur";
+        cell.movieRate.text = "8/10";
+        
+        
+        
+        
+        cell.backgroundColor = UIColor(red: 35/255.0, green: 35/255.0, blue: 35/255.0, alpha: 0.0);
         
         return cell
     }

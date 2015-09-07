@@ -15,6 +15,7 @@ class ShowViewController: UIViewController {
     var movie = NSDictionary();
     var localMovie:AnyObject = "";
     var local = true;
+
     
     func makeAddButton(){
         var addButton : UIBarButtonItem = UIBarButtonItem(title: "À regarder", style: UIBarButtonItemStyle.Plain, target: self, action: "addMovie")
@@ -34,8 +35,6 @@ class ShowViewController: UIViewController {
         
         var genre1 = "";
         var genre2 = "";
-        
-        
         
         
         if genres.count == 0{
@@ -94,6 +93,7 @@ class ShowViewController: UIViewController {
     func deleteMovie(){
         
         context.deleteObject(localMovie as! NSManagedObject);
+        context.save(nil);
         self.performSegueWithIdentifier("backToList", sender: AnyObject?());
         
     }
