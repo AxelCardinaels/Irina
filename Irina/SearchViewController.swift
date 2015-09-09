@@ -25,7 +25,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UISearchBarDe
         if searchBar.text == ""{
             
             searchBar.setShowsCancelButton(true, animated: true)
-            
+            searchBar.tintColor = UIColor.whiteColor()
         }
         
     }
@@ -86,6 +86,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UISearchBarDe
         
     }
     
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        self.searchBar.endEditing(true);
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -130,8 +133,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UISearchBarDe
             cell.movieTitle?.text = "No Name"
         }
         
-        cell.movieTitle?.numberOfLines = 0;
-        cell.movieTitle?.lineBreakMode = NSLineBreakMode.ByWordWrapping;
         
         cell.movieType.text = "Action & Horreur";
         cell.movieRate.text = "8/10";
@@ -140,6 +141,13 @@ class SearchViewController: UIViewController, UITableViewDelegate, UISearchBarDe
         
         
         cell.backgroundColor = UIColor(red: 35/255.0, green: 35/255.0, blue: 35/255.0, alpha: 0.0);
+        
+        cell.movieTitle.lineBreakMode = NSLineBreakMode.ByWordWrapping;
+        cell.movieTitle.numberOfLines = 0;
+        var bgColorView = UIView()
+        bgColorView.backgroundColor = UIColor(red: 5/255.0, green: 5/255.0, blue: 5/255.0, alpha: 1.0);
+        cell.selectedBackgroundView = bgColorView;
+
         
         return cell
     }

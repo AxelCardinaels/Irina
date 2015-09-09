@@ -76,6 +76,9 @@ class ListViewController: UIViewController, UITableViewDelegate {
         
         cell.movieTitle.lineBreakMode = NSLineBreakMode.ByWordWrapping;
         cell.movieTitle.numberOfLines = 0;
+        var bgColorView = UIView()
+        bgColorView.backgroundColor = UIColor(red: 5/255.0, green: 5/255.0, blue: 5/255.0, alpha: 1.0);
+        cell.selectedBackgroundView = bgColorView;
 
         
         
@@ -91,10 +94,7 @@ class ListViewController: UIViewController, UITableViewDelegate {
             cell.movieRate.text = "\(rating as String)/10";
         }
         
-        
-        
-        
-        cell.backgroundColor = UIColor(red: 35/255.0, green: 35/255.0, blue: 35/255.0, alpha: 0.0);
+
         
         
         
