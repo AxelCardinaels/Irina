@@ -54,6 +54,8 @@ class ShowViewController: UIViewController {
         }
         
         
+        
+        
         let notes = movie["notes"] as! NSDictionary;
         var note = notes["mean"] as! NSString;
         var noteMiddle = note
@@ -65,7 +67,6 @@ class ShowViewController: UIViewController {
         var fullDate: String = movie["release_date"] as! String
         var fullDateParts = fullDate.componentsSeparatedByString("-")
         
-        println(fullDateParts)
         
         newMovie.setValue(movie["title"] as! String, forKey: "title");
         newMovie.setValue(movie["id"] as! Int, forKey: "id");
@@ -83,7 +84,7 @@ class ShowViewController: UIViewController {
         newMovie.setValue(fullDateParts[1], forKey: "releaseMonth");
         newMovie.setValue(fullDateParts[2], forKey: "releaseDay");
         newMovie.setValue("\(note)", forKey: "ratingFull");
-         newMovie.setValue("\(noteShort)", forKey: "ratingShort");
+        newMovie.setValue("\(noteShort)", forKey: "ratingShort");
         
         
         
@@ -100,12 +101,13 @@ class ShowViewController: UIViewController {
     
     func setMovie(){
         
-        println(localMovie.valueForKey("title"));
+       
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor();
         
         if local != true{
             irina.showMovie(idToShow, completionHandler: { (data, error) -> Void in

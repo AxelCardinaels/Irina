@@ -88,6 +88,8 @@ class ListViewController: UIViewController, UITableViewDelegate {
             }else{
                 cell.movieType.text = type1 as String;
             }
+        }else{
+            cell.movieType.text = "Pas de genres"
         }
         
         if let rating = moviesToWatch[indexPath.row].valueForKey("ratingShort") as? NSString{

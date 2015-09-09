@@ -206,6 +206,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Ma liste" id="vf6-J3-9rH"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="movieToWatchTable" destination="Esl-YD-q0Y" id="VeD-7o-JhL"/>
                         <segue destination="jkH-f8-61r" kind="show" identifier="showMovie" id="mqL-9e-JfA"/>
@@ -403,10 +404,10 @@
             </objects>
             <point key="canvasLocation" x="1297" y="531"/>
         </scene>
-        <!--Afficher un film-->
+        <!--Informations-->
         <scene sceneID="w65-bY-BzU">
             <objects>
-                <viewController title="Afficher un film" id="jkH-f8-61r" customClass="ShowViewController" customModule="Irina" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Informations" id="jkH-f8-61r" customClass="ShowViewController" customModule="Irina" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Rs5-7G-1Y6"/>
                         <viewControllerLayoutGuide type="bottom" id="anR-5M-z3N"/>
@@ -415,24 +416,54 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PHR-X5-o9g">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9FG-qP-3G9">
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <items>
-                                    <barButtonItem title="Ma liste" id="LWh-6X-i71">
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="jGW-iQ-taY"/>
+                                    <barButtonItem image="listicon" id="niX-fK-ULo">
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
-                                            <segue destination="6VT-Wf-hXf" kind="show" id="YhV-z0-jTI"/>
+                                            <segue destination="6VT-Wf-hXf" kind="show" id="5pD-fS-NEw"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="UUn-gs-DUi"/>
-                                    <barButtonItem title="Chercher un film" id="sxV-mn-ccV"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="gNB-jj-Q9y"/>
+                                    <barButtonItem image="searchIcon" id="jdV-hj-ZnE">
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="0.70000000000000007" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="UrY-2I-43a">
+                                        <connections>
+                                            <segue destination="IyP-YY-pBc" kind="show" id="k4c-B9-S6g"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
+                            <view alpha="0.60000002384185791" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="guO-kg-Ebl" userLabel="ToolBar Border">
+                                <rect key="frame" x="0.0" y="523" width="320" height="1"/>
+                                <color key="backgroundColor" red="0.28235294119999998" green="0.28235294119999998" blue="0.28235294119999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="0Yv-cJ-xSO"/>
+                                </constraints>
+                            </view>
+                            <view alpha="0.60000002384185791" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lcw-bE-LEG" userLabel="Title Border">
+                                <rect key="frame" x="0.0" y="20" width="320" height="1"/>
+                                <color key="backgroundColor" red="0.28235294119999998" green="0.28235294119999998" blue="0.28235294119999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="otw-mV-QYH"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.098039215690000001" green="0.098039215690000001" blue="0.098039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="anR-5M-z3N" firstAttribute="top" secondItem="PHR-X5-o9g" secondAttribute="bottom" id="HP8-mp-Ifu"/>
-                            <constraint firstItem="PHR-X5-o9g" firstAttribute="leading" secondItem="pmo-X0-xXe" secondAttribute="leadingMargin" constant="-16" id="MJA-QM-eYT"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="PHR-X5-o9g" secondAttribute="trailing" constant="-16" id="eIm-uY-E5P"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9FG-qP-3G9" secondAttribute="trailing" constant="-16" id="A7E-PH-wfQ"/>
+                            <constraint firstItem="9FG-qP-3G9" firstAttribute="top" secondItem="guO-kg-Ebl" secondAttribute="bottom" id="I69-kU-WvL"/>
+                            <constraint firstItem="lcw-bE-LEG" firstAttribute="leading" secondItem="pmo-X0-xXe" secondAttribute="leadingMargin" constant="-16" id="Nn0-sB-PL4"/>
+                            <constraint firstItem="guO-kg-Ebl" firstAttribute="leading" secondItem="pmo-X0-xXe" secondAttribute="leadingMargin" constant="-16" id="Ojl-dc-aNA"/>
+                            <constraint firstItem="9FG-qP-3G9" firstAttribute="leading" secondItem="pmo-X0-xXe" secondAttribute="leadingMargin" constant="-16" id="blZ-9C-ljZ"/>
+                            <constraint firstItem="lcw-bE-LEG" firstAttribute="top" secondItem="Rs5-7G-1Y6" secondAttribute="bottom" id="cN7-2D-uqH"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="lcw-bE-LEG" secondAttribute="trailing" constant="-16" id="e49-OU-n6V"/>
+                            <constraint firstItem="anR-5M-z3N" firstAttribute="top" secondItem="9FG-qP-3G9" secondAttribute="bottom" id="ni8-cC-FNX"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="guO-kg-Ebl" secondAttribute="trailing" constant="-16" id="zAU-y4-a6p"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Informations" id="PfC-yG-fxd"/>
@@ -454,7 +485,8 @@
         <image name="searchIcon" width="27" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="EAW-KU-ueL"/>
-        <segue reference="r71-4n-81d"/>
+        <segue reference="mqL-9e-JfA"/>
+        <segue reference="IQt-RV-mZ5"/>
+        <segue reference="ieu-6J-UxZ"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -36,14 +36,14 @@ class SearchViewController: UIViewController, UITableViewDelegate, UISearchBarDe
         
         if searchBar.text == ""{
             
-            
+            movies = [];
+            movieTable.reloadData()
         }else{
             let searchString = searchBar.text.stringByReplacingOccurrencesOfString(" ", withString: "+");
             irina.searchMovies(searchString, completionHandler: {data, error -> Void in
                 
                 if (data != nil) {
                     self.movies = NSMutableArray(array: data);
-                    println(self.movies)
                     dispatch_async(dispatch_get_main_queue(), { self.movieTable.reloadData() })
                 } else {
                     println("api.getData failed")
@@ -62,6 +62,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UISearchBarDe
         self.searchBar.endEditing(true);
         
         if searchBar.text == ""{
+            
             
         }else{
             let searchString = searchBar.text.stringByReplacingOccurrencesOfString(" ", withString: "+");
@@ -83,7 +84,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UISearchBarDe
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         self.searchBar.endEditing(true);
         searchBar.setShowsCancelButton(false, animated: true);
-        
+        searchBar.text = "";
+        movies = [];
+        movieTable.reloadData()
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -126,17 +129,57 @@ class SearchViewController: UIViewController, UITableViewDelegate, UISearchBarDe
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
         let cell = tableView.dequeueReusableCellWithIdentifier("movieCell", forIndexPath: indexPath) as! MovieTableViewCell
         
+        var fullDate: String = self.movies[indexPath.row]["release_date"] as! String
+        var fullDateParts = fullDate.componentsSeparatedByString("-")
+        
+        
         if let actualMovie = self.movies[indexPath.row]["title"] as? NSString {
             
-            cell.movieTitle?.text = actualMovie as? String
+            cell.movieTitle?.text = "\(actualMovie as! String) (\(fullDateParts[0]))"
         } else {
             cell.movieTitle?.text = "No Name"
         }
         
+        let notes = self.movies[indexPath.row]["notes"] as! NSDictionary;
+        var note : AnyObject = notes["mean"]!
+        var noteMiddle = toString(note);
+        var noteFull = ((noteMiddle as NSString).floatValue)*2
+        var noteShort = (NSString(format: "%.01f", noteFull))
         
-        cell.movieType.text = "Action & Horreur";
-        cell.movieRate.text = "8/10";
         
+        cell.movieRate.text = "\(noteShort)/10";
+        
+        let genres = self.movies[indexPath.row]["genres"] as! NSArray
+        
+        var genre1 = "";
+        var genre2 = "";
+        
+        
+        if genres.count == 0{
+            genre1 = "Pas de genres";
+            genre2 = "";
+        }
+        
+        
+        if genres.count == 1 {
+            genre1 = genres[0] as! String;
+            genre2 = "";
+        }
+        
+        if genres.count > 1{
+            genre1 = genres[0] as! String;
+            genre2 = genres[1] as! String;
+        }
+        
+        if genre1 != ""{
+            if genre2 != ""{
+                cell.movieType.text = "\(genre1) & \(genre2)";
+            }else{
+                cell.movieType.text = genre1
+            }
+        }else{
+            cell.movieType.text = "Pas de genres"
+        }
         
         
         
@@ -147,7 +190,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UISearchBarDe
         var bgColorView = UIView()
         bgColorView.backgroundColor = UIColor(red: 5/255.0, green: 5/255.0, blue: 5/255.0, alpha: 1.0);
         cell.selectedBackgroundView = bgColorView;
-
+        
         
         return cell
     }
@@ -163,7 +206,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UISearchBarDe
             var secondView: ShowViewController = segue.destinationViewController as! ShowViewController
             
             secondView.idToShow = (selectedMovie["id"] as? Int)!;
-            secondView.title = selectedMovie["title"] as? String;
             secondView.local = false;
             
             
