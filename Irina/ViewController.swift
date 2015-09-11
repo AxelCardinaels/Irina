@@ -67,6 +67,12 @@ class irinaApi {
             theMovie = movie;
         }
         
+        var count = context.countForFetchRequest(request, error: nil);
+        
+        if count == 0{
+            theMovie = 0;
+        }
+        
         return completionHandler(theMovie, nil);
     }
     
@@ -77,7 +83,7 @@ func addBlurEffect(view:UIViewController) {
     view.navigationController!.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
     view.navigationController!.navigationBar.shadowImage = UIImage()
     view.navigationController!.navigationBar.translucent = true
-        
+    
     
 }
 

@@ -15,7 +15,7 @@ class ShowViewController: UIViewController {
     var movie = NSDictionary();
     var localMovie:AnyObject = "";
     var local = true;
-
+    
     
     func makeAddButton(){
         var addButton : UIBarButtonItem = UIBarButtonItem(title: "À regarder", style: UIBarButtonItemStyle.Plain, target: self, action: "addMovie")
@@ -95,13 +95,16 @@ class ShowViewController: UIViewController {
         
         context.deleteObject(localMovie as! NSManagedObject);
         context.save(nil);
+        
+        
+        
         self.performSegueWithIdentifier("backToList", sender: AnyObject?());
         
     }
     
     func setMovie(){
         
-       
+        
     }
     
     override func viewDidLoad() {
@@ -122,7 +125,25 @@ class ShowViewController: UIViewController {
                 }
             })
             
-            makeAddButton();
+            irina.showLocalMovie(idToShow, completionHandler: { (data, error) -> Void in
+                
+                
+                
+                if data as! AnyObject as! NSObject == 0 {
+                    
+                    self.makeAddButton()
+                } else {
+                     self.localMovie = data
+                    self.makeRemoveButton()
+                   
+                }
+                
+            })
+            
+            
+            
+            
+            
         }else{
             irina.showLocalMovie(idToShow, completionHandler: { (data, error) -> Void in
                 self.localMovie = data
