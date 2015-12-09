@@ -25,9 +25,9 @@ class ListViewController: UIViewController, UITableViewDelegate {
     }
     
     func loadList(){
-        var request = NSFetchRequest(entityName: "Movie")
+        let request = NSFetchRequest(entityName: "Movie")
         request.returnsObjectsAsFaults = false;
-        moviesToWatch = context.executeFetchRequest(request,error:nil)!;
+        moviesToWatch = try! context.executeFetchRequest(request);
         movieToWatchTable.reloadData();
         
     }
@@ -37,7 +37,10 @@ class ListViewController: UIViewController, UITableViewDelegate {
         addBlurEffect(self);
         movieToWatchTable.rowHeight = UITableViewAutomaticDimension
         movieToWatchTable.estimatedRowHeight = 77.0;
-        self.navigationItem.setHidesBackButton(true, animated: true)
+        self.navigationItem.setHidesBackButton(false, animated: true)
+        self.navigationItem.backBarButtonItem?.tintColor = UIColor.whiteColor()
+        self.navigationItem.backBarButtonItem?.title = "Back";
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor();
         
         //Mise en place du refresh
         refresher.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
@@ -67,7 +70,7 @@ class ListViewController: UIViewController, UITableViewDelegate {
             cell.movieTitle?.text = actualMovie as? String
             
             if let movieDate = moviesToWatch[indexPath.row].valueForKey("releaseYear") as? NSString{
-                cell.movieTitle?.text = "\(actualMovie as! String) (\(movieDate as! String))"
+                cell.movieTitle?.text = "\(actualMovie as String) (\(movieDate as String))"
             }
         } else {
             cell.movieTitle?.text = "No Name"
@@ -76,10 +79,10 @@ class ListViewController: UIViewController, UITableViewDelegate {
         
         cell.movieTitle.lineBreakMode = NSLineBreakMode.ByWordWrapping;
         cell.movieTitle.numberOfLines = 0;
-        var bgColorView = UIView()
+        let bgColorView = UIView()
         bgColorView.backgroundColor = UIColor(red: 5/255.0, green: 5/255.0, blue: 5/255.0, alpha: 1.0);
         cell.selectedBackgroundView = bgColorView;
-
+        
         
         
         if let type1 = moviesToWatch[indexPath.row].valueForKey("type1") as? NSString{
@@ -96,7 +99,7 @@ class ListViewController: UIViewController, UITableViewDelegate {
             cell.movieRate.text = "\(rating as String)/10";
         }
         
-
+        
         
         
         
@@ -120,14 +123,17 @@ class ListViewController: UIViewController, UITableViewDelegate {
             irina.showLocalMovie(selectedId, completionHandler: { (data, error) -> Void in
                 self.movieToDelete = data
                 context.deleteObject(self.movieToDelete as! NSManagedObject);
-                context.save(nil);
+                do {
+                    try context.save()
+                } catch _ {
+                };
                 self.loadList();
                 self.movieToWatchTable.reloadData()
             })
             
         }
         
-      
+        
     }
     
     
@@ -136,9 +142,9 @@ class ListViewController: UIViewController, UITableViewDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "showMovie" {
-            var secondView: ShowViewController = segue.destinationViewController as! ShowViewController
+            let secondView: ShowViewController = segue.destinationViewController as! ShowViewController
             
-
+            
             secondView.idToShow = selectedId
             secondView.local = true;
             

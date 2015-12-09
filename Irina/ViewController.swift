@@ -23,7 +23,7 @@ class irinaApi {
             }
             
             var error: NSError?
-            let json = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &error)as! NSDictionary
+            let json = (try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers))as! NSDictionary
             
             if (error != nil) {
                 return completionHandler(nil, error)
@@ -44,7 +44,7 @@ class irinaApi {
             }
             
             var error: NSError?
-            let json = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &error)as! NSDictionary
+            let json = (try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers))as! NSDictionary
             
             if (error != nil) {
                 return completionHandler(nil, error)
@@ -58,16 +58,16 @@ class irinaApi {
     func showLocalMovie(id:Int, completionHandler: ((AnyObject, NSError!) -> Void)!) -> Void {
         
         var theMovie : AnyObject = "";
-        var request = NSFetchRequest(entityName: "Movie");
+        let request = NSFetchRequest(entityName: "Movie");
         request.returnsObjectsAsFaults = false;
         request.predicate = NSPredicate(format: "id = %@", "\(id)");
-        var findMovies = context.executeFetchRequest(request, error: nil)!;
+        let findMovies = try! context.executeFetchRequest(request);
         
         for movie in findMovies{
             theMovie = movie;
         }
         
-        var count = context.countForFetchRequest(request, error: nil);
+        let count = context.countForFetchRequest(request, error: nil);
         
         if count == 0{
             theMovie = 0;
@@ -80,11 +80,9 @@ class irinaApi {
 
 func addBlurEffect(view:UIViewController) {
     
-    view.navigationController!.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-    view.navigationController!.navigationBar.shadowImage = UIImage()
-    view.navigationController!.navigationBar.translucent = true
-    
-    
+    //view.navigationController!.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+    //view.navigationController!.navigationBar.shadowImage = UIImage()
+    //view.navigationController!.navigationBar.translucent = true
 }
 
 var irina = irinaApi();

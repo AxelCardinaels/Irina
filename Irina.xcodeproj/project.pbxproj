@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		777099BF1C18ABDB003296CE /* ListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777099BE1C18ABDA003296CE /* ListsViewController.swift */; };
+		777099C11C18ACA8003296CE /* ListsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777099C01C18ACA8003296CE /* ListsTableViewCell.swift */; };
 		779751611B920EFA0038E234 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779751601B920EFA0038E234 /* AppDelegate.swift */; };
 		779751641B920EFA0038E234 /* Irina.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 779751621B920EFA0038E234 /* Irina.xcdatamodeld */; };
 		779751661B920EFA0038E234 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779751651B920EFA0038E234 /* ViewController.swift */; };
@@ -31,6 +33,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		777099BD1C1893DA003296CE /* Irina 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Irina 2.xcdatamodel"; sourceTree = "<group>"; };
+		777099BE1C18ABDA003296CE /* ListsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsViewController.swift; sourceTree = "<group>"; };
+		777099C01C18ACA8003296CE /* ListsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsTableViewCell.swift; sourceTree = "<group>"; };
 		7797515B1B920EF90038E234 /* Irina.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Irina.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7797515F1B920EFA0038E234 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		779751601B920EFA0038E234 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -90,10 +95,12 @@
 				779751601B920EFA0038E234 /* AppDelegate.swift */,
 				779751651B920EFA0038E234 /* ViewController.swift */,
 				779751871B933B7C0038E234 /* ListViewController.swift */,
+				777099BE1C18ABDA003296CE /* ListsViewController.swift */,
 				779751831B9215C20038E234 /* SearchViewController.swift */,
 				779751851B9309320038E234 /* ShowViewController.swift */,
-				779751671B920EFA0038E234 /* Main.storyboard */,
 				779751891B9CE8E90038E234 /* MovieTableViewCell.swift */,
+				777099C01C18ACA8003296CE /* ListsTableViewCell.swift */,
+				779751671B920EFA0038E234 /* Main.storyboard */,
 				7797516A1B920EFA0038E234 /* Images.xcassets */,
 				7797516C1B920EFA0038E234 /* LaunchScreen.xib */,
 				779751621B920EFA0038E234 /* Irina.xcdatamodeld */,
@@ -171,7 +178,9 @@
 		779751531B920EF90038E234 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastSwiftMigration = 0710;
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Axel Cardinaels";
 				TargetAttributes = {
 					7797515A1B920EF90038E234 = {
@@ -229,6 +238,8 @@
 			files = (
 				779751861B9309320038E234 /* ShowViewController.swift in Sources */,
 				779751661B920EFA0038E234 /* ViewController.swift in Sources */,
+				777099C11C18ACA8003296CE /* ListsTableViewCell.swift in Sources */,
+				777099BF1C18ABDB003296CE /* ListsViewController.swift in Sources */,
 				7797518A1B9CE8E90038E234 /* MovieTableViewCell.swift in Sources */,
 				779751881B933B7D0038E234 /* ListViewController.swift in Sources */,
 				779751611B920EFA0038E234 /* AppDelegate.swift in Sources */,
@@ -296,6 +307,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -363,8 +375,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Irina/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Com.AxelCardinaels.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -374,8 +387,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Irina/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Com.AxelCardinaels.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -394,6 +408,7 @@
 				);
 				INFOPLIST_FILE = IrinaTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Com.AxelCardinaels.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Irina.app/Irina";
 			};
@@ -409,6 +424,7 @@
 				);
 				INFOPLIST_FILE = IrinaTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Com.AxelCardinaels.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Irina.app/Irina";
 			};
@@ -433,6 +449,7 @@
 				7797517F1B920EFB0038E234 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		779751801B920EFB0038E234 /* Build configuration list for PBXNativeTarget "IrinaTests" */ = {
 			isa = XCConfigurationList;
@@ -441,6 +458,7 @@
 				779751821B920EFB0038E234 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
@@ -448,9 +466,10 @@
 		779751621B920EFA0038E234 /* Irina.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				777099BD1C1893DA003296CE /* Irina 2.xcdatamodel */,
 				779751631B920EFA0038E234 /* Irina.xcdatamodel */,
 			);
-			currentVersion = 779751631B920EFA0038E234 /* Irina.xcdatamodel */;
+			currentVersion = 777099BD1C1893DA003296CE /* Irina 2.xcdatamodel */;
 			path = Irina.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

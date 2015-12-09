@@ -39,15 +39,15 @@ class SearchViewController: UIViewController, UITableViewDelegate, UISearchBarDe
             movies = [];
             movieTable.reloadData()
         }else{
-            let searchString = searchBar.text.stringByReplacingOccurrencesOfString(" ", withString: "+");
+            let searchString = searchBar.text!.stringByReplacingOccurrencesOfString(" ", withString: "+");
             irina.searchMovies(searchString, completionHandler: {data, error -> Void in
                 
                 if (data != nil) {
                     self.movies = NSMutableArray(array: data);
                     dispatch_async(dispatch_get_main_queue(), { self.movieTable.reloadData() })
                 } else {
-                    println("api.getData failed")
-                    println(error)
+                    print("api.getData failed")
+                    print(error)
                 }
             })
         }
@@ -65,15 +65,15 @@ class SearchViewController: UIViewController, UITableViewDelegate, UISearchBarDe
             
             
         }else{
-            let searchString = searchBar.text.stringByReplacingOccurrencesOfString(" ", withString: "+");
+            let searchString = searchBar.text!.stringByReplacingOccurrencesOfString(" ", withString: "+");
             irina.searchMovies(searchString, completionHandler: {data, error -> Void in
                 
                 if (data != nil) {
                     self.movies = NSMutableArray(array: data);
                     dispatch_async(dispatch_get_main_queue(), { self.movieTable.reloadData() })
                 } else {
-                    println("api.getData failed")
-                    println(error)
+                    print("api.getData failed")
+                    print(error)
                 }
             })
         }
@@ -89,7 +89,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UISearchBarDe
         movieTable.reloadData()
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.searchBar.endEditing(true);
     }
     
@@ -99,7 +99,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UISearchBarDe
         self.navigationItem.setHidesBackButton(true, animated: true)
         //Mise en place de la barre de recherche dans la bar de navigation
         
-        var colorTextSearchBar = searchBar.valueForKey("searchField") as? UITextField
+        let colorTextSearchBar = searchBar.valueForKey("searchField") as? UITextField
         colorTextSearchBar?.textColor = UIColor.whiteColor()
         searchBar.sizeToFit()
         searchBar.searchBarStyle = UISearchBarStyle.Minimal
@@ -129,22 +129,22 @@ class SearchViewController: UIViewController, UITableViewDelegate, UISearchBarDe
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
         let cell = tableView.dequeueReusableCellWithIdentifier("movieCell", forIndexPath: indexPath) as! MovieTableViewCell
         
-        var fullDate: String = self.movies[indexPath.row]["release_date"] as! String
+        let fullDate: String = self.movies[indexPath.row]["release_date"] as! String
         var fullDateParts = fullDate.componentsSeparatedByString("-")
         
         
         if let actualMovie = self.movies[indexPath.row]["title"] as? NSString {
             
-            cell.movieTitle?.text = "\(actualMovie as! String) (\(fullDateParts[0]))"
+            cell.movieTitle?.text = "\(actualMovie as String) (\(fullDateParts[0]))"
         } else {
             cell.movieTitle?.text = "No Name"
         }
         
         let notes = self.movies[indexPath.row]["notes"] as! NSDictionary;
-        var note : AnyObject = notes["mean"]!
-        var noteMiddle = toString(note);
-        var noteFull = ((noteMiddle as NSString).floatValue)*2
-        var noteShort = (NSString(format: "%.01f", noteFull))
+        let note : AnyObject = notes["mean"]!
+        let noteMiddle = String(note);
+        let noteFull = ((noteMiddle as NSString).floatValue)*2
+        let noteShort = (NSString(format: "%.01f", noteFull))
         
         
         cell.movieRate.text = "\(noteShort)/10";
@@ -187,7 +187,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UISearchBarDe
         
         cell.movieTitle.lineBreakMode = NSLineBreakMode.ByWordWrapping;
         cell.movieTitle.numberOfLines = 0;
-        var bgColorView = UIView()
+        let bgColorView = UIView()
         bgColorView.backgroundColor = UIColor(red: 5/255.0, green: 5/255.0, blue: 5/255.0, alpha: 1.0);
         cell.selectedBackgroundView = bgColorView;
         
@@ -203,7 +203,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UISearchBarDe
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "showMovie" {
-            var secondView: ShowViewController = segue.destinationViewController as! ShowViewController
+            let secondView: ShowViewController = segue.destinationViewController as! ShowViewController
             
             secondView.idToShow = (selectedMovie["id"] as? Int)!;
             secondView.local = false;

@@ -18,18 +18,18 @@ class ShowViewController: UIViewController {
     
     
     func makeAddButton(){
-        var addButton : UIBarButtonItem = UIBarButtonItem(title: "À regarder", style: UIBarButtonItemStyle.Plain, target: self, action: "addMovie")
+        let addButton : UIBarButtonItem = UIBarButtonItem(title: "À regarder", style: UIBarButtonItemStyle.Plain, target: self, action: "addMovie")
         self.navigationItem.rightBarButtonItem = addButton
     }
     
     func makeRemoveButton(){
-        var addButton : UIBarButtonItem = UIBarButtonItem(title: "Je l'ai vu !", style: UIBarButtonItemStyle.Plain, target: self, action: "deleteMovie")
+        let addButton : UIBarButtonItem = UIBarButtonItem(title: "Je l'ai vu !", style: UIBarButtonItemStyle.Plain, target: self, action: "deleteMovie")
         self.navigationItem.rightBarButtonItem = addButton
     }
     
     func addMovie(){
         
-        var newMovie = NSEntityDescription.insertNewObjectForEntityForName("Movie", inManagedObjectContext: context) as! NSManagedObject;
+        let newMovie = NSEntityDescription.insertNewObjectForEntityForName("Movie", inManagedObjectContext: context) ;
         
         let genres = movie["genres"] as! NSArray
         
@@ -57,14 +57,14 @@ class ShowViewController: UIViewController {
         
         
         let notes = movie["notes"] as! NSDictionary;
-        var note = notes["mean"] as! NSString;
-        var noteMiddle = note
-        var noteFull = ((noteMiddle as NSString).floatValue)*2
+        let note = notes["mean"] as! NSString;
+        let noteMiddle = note
+        let noteFull = ((noteMiddle as NSString).floatValue)*2
         
-        var noteShort = (NSString(format: "%.01f", noteFull))
+        let noteShort = (NSString(format: "%.01f", noteFull))
         
         
-        var fullDate: String = movie["release_date"] as! String
+        let fullDate: String = movie["release_date"] as! String
         var fullDateParts = fullDate.componentsSeparatedByString("-")
         
         
@@ -88,13 +88,19 @@ class ShowViewController: UIViewController {
         
         
         
-        context.save(nil);
+        do {
+            try context.save()
+        } catch _ {
+        };
     }
     
     func deleteMovie(){
         
         context.deleteObject(localMovie as! NSManagedObject);
-        context.save(nil);
+        do {
+            try context.save()
+        } catch _ {
+        };
         
         
         
@@ -120,8 +126,8 @@ class ShowViewController: UIViewController {
                     
                     
                 } else {
-                    println("api.showMovie failed")
-                    println(error)
+                    print("api.showMovie failed")
+                    print(error)
                 }
             })
             
@@ -129,7 +135,7 @@ class ShowViewController: UIViewController {
                 
                 
                 
-                if data as! AnyObject as! NSObject == 0 {
+                if data as! NSObject == 0 {
                     
                     self.makeAddButton()
                 } else {
