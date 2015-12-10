@@ -11,7 +11,6 @@ import UIKit
 class ListsViewController: UIViewController {
     
     @IBOutlet var ListsTableView: UITableView!
-    var userLists = ["Test","Test"];
     
     func makeAddButton(){
         let addButton : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addList")
@@ -21,7 +20,6 @@ class ListsViewController: UIViewController {
     func addList(){
         //1. Création de l'alerte
         
-        if #available(iOS 8.0, *) {
             let alert = UIAlertController(title: nil, message: "Créer une liste", preferredStyle: UIAlertControllerStyle.Alert)
             
             //2. Add the text field. You can configure it however you need.
@@ -32,8 +30,19 @@ class ListsViewController: UIViewController {
             //3. Grab the value from the text field, and print it when the user clicks OK.
             alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
                 let textField = alert.textFields![0] as UITextField
-                print("Text field: \(textField.text)")
+                
+                if textField.text != ""{
+                    irina.createList(textField.text!);
+                    irina.loadLists(self.ListsTableView);
+                    
+                }else{
+                    irina.createList("Liste sans titre");
+                    irina.loadLists(self.ListsTableView);
+                }
+                
+                
             }))
+        
             
             alert.addAction(UIAlertAction(title: "Annuler", style: UIAlertActionStyle.Destructive, handler: { (action) -> Void in
                 alert.dismissViewControllerAnimated(true, completion: nil)
@@ -41,18 +50,15 @@ class ListsViewController: UIViewController {
             
             // 4. Present the alert.
             self.presentViewController(alert, animated: true, completion: nil)
-        }
-        
-        
-        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        irina.loadLists(ListsTableView);
         
         ListsTableView.rowHeight = UITableViewAutomaticDimension
         ListsTableView.estimatedRowHeight = 77.0;
-        self.navigationItem.setHidesBackButton(false, animated: true)
+        self.navigationItem.setHidesBackButton(true, animated: true)
         makeAddButton()
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor();
         
@@ -68,15 +74,22 @@ class ListsViewController: UIViewController {
     
     
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
-        return userLists.count;
+        return lists.count;
     }
     
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
         let cell = tableView.dequeueReusableCellWithIdentifier("ListsCell", forIndexPath: indexPath) as! ListsTableViewCell
         
         
+        if let actualList = lists[indexPath.row].valueForKey("name") as? NSString {
+            
+            cell.ListTitle.text = actualList as? String
+            
+        } else {
+            cell.ListTitle.text = "Liste sans titre"
+        }
         
-        cell.ListTitle.text = "du texte du texte du texte du texte du texte encore du texte";
+        
         cell.ListItems.text = "3 films";
         
         cell.ListTitle.lineBreakMode = NSLineBreakMode.ByWordWrapping;

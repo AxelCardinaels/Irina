@@ -76,17 +76,43 @@ class irinaApi {
         return completionHandler(theMovie, nil);
     }
     
+    func createList(title: String){
+        
+        let newList = NSEntityDescription.insertNewObjectForEntityForName("Lists", inManagedObjectContext: context) ;
+        
+        newList.setValue(title, forKey: "name");
+        newList.setValue(title, forKey: "id");
+        
+
+        
+        do {
+            try context.save()
+        } catch _ {
+        };
+
+        
+    }
+    
+    func loadLists(table: UITableView){
+        let request = NSFetchRequest(entityName: "Lists")
+        request.returnsObjectsAsFaults = false;
+        lists = try! context.executeFetchRequest(request);
+        table.reloadData();
+        
+    }
+    
 }
 
 func addBlurEffect(view:UIViewController) {
     
-    //view.navigationController!.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-    //view.navigationController!.navigationBar.shadowImage = UIImage()
-    //view.navigationController!.navigationBar.translucent = true
+    view.navigationController!.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+    view.navigationController!.navigationBar.shadowImage = UIImage()
+    view.navigationController!.navigationBar.translucent = true
 }
 
 var irina = irinaApi();
 var moviesToWatch = [];
+var lists = [];
 var appDel:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate;
 var context:NSManagedObjectContext = appDel.managedObjectContext!
 
