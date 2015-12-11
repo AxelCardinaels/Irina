@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import CoreData
 
 class ListsViewController: UIViewController {
     
     @IBOutlet var ListsTableView: UITableView!
+    var listToDelete:AnyObject = "";
     
     func makeAddButton(){
         let addButton : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addList")
@@ -83,11 +85,9 @@ class ListsViewController: UIViewController {
         
         if let actualList = lists[indexPath.row].valueForKey("name") as? NSString {
             
-            cell.ListTitle.text = actualList as? String
+            cell.ListTitle.text = actualList as String
             
-        } else {
-            cell.ListTitle.text = "Liste sans titre"
-        }
+        };
         
         
         cell.ListItems.text = "3 films";
@@ -103,7 +103,27 @@ class ListsViewController: UIViewController {
         return cell
     }
     
-    
+    func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
+        
+        let selectedList = lists[indexPath.row].valueForKey("name") as! String;
+        print(selectedList)
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            irina.findList(selectedList, completionHandler: { (data, error) -> Void in
+                self.listToDelete = data
+                
+                print(self.listToDelete)
+                context.deleteObject(self.listToDelete as! NSManagedObject);
+                do {
+                    try context.save()
+                } catch _ {
+                };
+                irina.loadLists(self.ListsTableView);
+            })
+            
+        }
+        
+        
+    }
     
     
 }

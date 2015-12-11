@@ -83,13 +83,13 @@ class irinaApi {
         newList.setValue(title, forKey: "name");
         newList.setValue(title, forKey: "id");
         
-
+        
         
         do {
             try context.save()
         } catch _ {
         };
-
+        
         
     }
     
@@ -99,6 +99,27 @@ class irinaApi {
         lists = try! context.executeFetchRequest(request);
         table.reloadData();
         
+    }
+    
+    func findList(title:String, completionHandler: ((AnyObject, NSError!) -> Void)!) -> Void {
+        
+        var theList : AnyObject = "";
+        let request = NSFetchRequest(entityName: "Lists");
+        request.returnsObjectsAsFaults = false;
+        request.predicate = NSPredicate(format: "name = %@", "\(title)");
+        let findList = try! context.executeFetchRequest(request);
+        
+        for list in findList{
+            theList = list;
+        }
+        
+        let count = context.countForFetchRequest(request, error: nil);
+        
+        if count == 0{
+            theList = 0;
+        }
+        
+        return completionHandler(theList, nil);
     }
     
 }
