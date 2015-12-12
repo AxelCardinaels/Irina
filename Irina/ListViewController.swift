@@ -19,18 +19,10 @@ class ListViewController: UIViewController, UITableViewDelegate {
     
     func refreshData(){
         
-        loadList()
-        movieToWatchTable.reloadData()
+        irina.loadMoviesFromList(movieToWatchTable, listId: "ayDOhpbr6egsxoo");
         self.refresher.endRefreshing()
     }
     
-    func loadList(){
-        let request = NSFetchRequest(entityName: "Movie")
-        request.returnsObjectsAsFaults = false;
-        moviesToWatch = try! context.executeFetchRequest(request);
-        movieToWatchTable.reloadData();
-        
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +45,7 @@ class ListViewController: UIViewController, UITableViewDelegate {
     }
     
     override func viewDidAppear(animated: Bool) {
-        loadList();
+        irina.loadMoviesFromList(movieToWatchTable, listId: "ayDOhpbr6egsxoo");
     }
     
     
@@ -127,8 +119,7 @@ class ListViewController: UIViewController, UITableViewDelegate {
                     try context.save()
                 } catch _ {
                 };
-                self.loadList();
-                self.movieToWatchTable.reloadData()
+                irina.loadMoviesFromList(self.movieToWatchTable, listId: "ayDOhpbr6egsxoo");
             })
             
         }

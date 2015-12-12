@@ -85,6 +85,7 @@ class ShowViewController: UIViewController {
         newMovie.setValue(fullDateParts[2], forKey: "releaseDay");
         newMovie.setValue("\(note)", forKey: "ratingFull");
         newMovie.setValue("\(noteShort)", forKey: "ratingShort");
+        newMovie.setValue("ayDOhpbr6egsxoo", forKey: "listId");
         
         
         

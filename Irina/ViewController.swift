@@ -84,8 +84,6 @@ class irinaApi {
         let listId = irina.createId(15);
         newList.setValue(listId as String, forKey: "id");
         
-        
-        
         do {
             try context.save()
         } catch _ {
@@ -100,6 +98,27 @@ class irinaApi {
         lists = try! context.executeFetchRequest(request);
         table.reloadData();
         
+    }
+    
+    func loadMoviesFromList(table:UITableView, listId:String){
+        let request = NSFetchRequest(entityName: "Movie")
+        request.returnsObjectsAsFaults = false;
+        request.predicate = NSPredicate(format: "listId = %@", "\(listId)");
+        moviesToWatch = try! context.executeFetchRequest(request);
+        table.reloadData();
+        
+    }
+    
+    func countMoviesInList(id:String,completionHandler: ((AnyObject, NSError!) -> Void)!) -> Void {
+        
+        var films = [];
+        let request = NSFetchRequest(entityName: "Movie")
+        request.returnsObjectsAsFaults = false;
+        request.predicate = NSPredicate(format: "listId = %@", "\(id)");
+        films = try! context.executeFetchRequest(request);
+        
+        
+        return completionHandler(films, nil);
     }
     
     func findList(title:String, completionHandler: ((AnyObject, NSError!) -> Void)!) -> Void {

@@ -22,36 +22,36 @@ class ListsViewController: UIViewController {
     func addList(){
         //1. Création de l'alerte
         
-            let alert = UIAlertController(title: nil, message: "Créer une liste", preferredStyle: UIAlertControllerStyle.Alert)
-            
-            //2. Add the text field. You can configure it however you need.
-            alert.addTextFieldWithConfigurationHandler({ (textField) -> Void in
-                textField.placeholder = "Nom de la liste"
-            })
-            
-            //3. Grab the value from the text field, and print it when the user clicks OK.
-            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
-                let textField = alert.textFields![0] as UITextField
-                
-                if textField.text != ""{
-                    irina.createList(textField.text!);
-                    irina.loadLists(self.ListsTableView);
-                    
-                }else{
-                    irina.createList("Liste sans titre");
-                    irina.loadLists(self.ListsTableView);
-                }
-                
-                
-            }))
+        let alert = UIAlertController(title: nil, message: "Créer une liste", preferredStyle: UIAlertControllerStyle.Alert)
         
+        //2. Add the text field. You can configure it however you need.
+        alert.addTextFieldWithConfigurationHandler({ (textField) -> Void in
+            textField.placeholder = "Nom de la liste"
+        })
+        
+        //3. Grab the value from the text field, and print it when the user clicks OK.
+        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
+            let textField = alert.textFields![0] as UITextField
             
-            alert.addAction(UIAlertAction(title: "Annuler", style: UIAlertActionStyle.Destructive, handler: { (action) -> Void in
-                alert.dismissViewControllerAnimated(true, completion: nil)
-            }))
+            if textField.text != ""{
+                irina.createList(textField.text!);
+                irina.loadLists(self.ListsTableView);
+                
+            }else{
+                irina.createList("Liste sans titre");
+                irina.loadLists(self.ListsTableView);
+            }
             
-            // 4. Present the alert.
-            self.presentViewController(alert, animated: true, completion: nil)
+            
+        }))
+        
+        
+        alert.addAction(UIAlertAction(title: "Annuler", style: UIAlertActionStyle.Destructive, handler: { (action) -> Void in
+            alert.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        
+        // 4. Present the alert.
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -82,16 +82,33 @@ class ListsViewController: UIViewController {
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
         let cell = tableView.dequeueReusableCellWithIdentifier("ListsCell", forIndexPath: indexPath) as! ListsTableViewCell
         
+        var listId = lists[indexPath.row].valueForKey("id") as? NSString
+        var listCount = [];
         
-        if let actualList = lists[indexPath.row].valueForKey("name") as? NSString {
-            
-            cell.ListTitle.text = actualList as String
-            print(lists[indexPath.row].valueForKey("id") as? NSString)
-            
+        irina.countMoviesInList(listId as! String) { (data, error) -> Void in
+            listCount = data as! NSArray;
+            print(data)
         };
         
+        if let actualList = lists[indexPath.row].valueForKey("name") as? NSString {
+            cell.ListTitle.text = actualList as String
+        };
         
-        cell.ListItems.text = "3 films";
+        if listCount.count == 0 {
+            cell.ListItems.text = "Pas de films dans la liste";
+        }
+        
+        if listCount.count == 1 {
+            cell.ListItems.text = "\(listCount.count) film dans la liste";
+        }
+        
+        if listCount.count > 1 {
+            cell.ListItems.text = "\(listCount.count) films dans la liste";
+        }
+        
+        
+        
+        
         
         
         cell.ListTitle.lineBreakMode = NSLineBreakMode.ByWordWrapping;
@@ -106,6 +123,7 @@ class ListsViewController: UIViewController {
     }
     
     func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
+        
         
         let selectedList = lists[indexPath.row].valueForKey("name") as! String;
         print(selectedList)
