@@ -86,11 +86,13 @@ class ListsViewController: UIViewController {
         if let actualList = lists[indexPath.row].valueForKey("name") as? NSString {
             
             cell.ListTitle.text = actualList as String
+            print(lists[indexPath.row].valueForKey("id") as? NSString)
             
         };
         
         
         cell.ListItems.text = "3 films";
+        
         
         cell.ListTitle.lineBreakMode = NSLineBreakMode.ByWordWrapping;
         cell.ListTitle.numberOfLines = 0;
