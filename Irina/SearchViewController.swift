@@ -129,6 +129,26 @@ class SearchViewController: UIViewController, UITableViewDelegate, UISearchBarDe
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
         let cell = tableView.dequeueReusableCellWithIdentifier("movieCell", forIndexPath: indexPath) as! MovieTableViewCell
         
+        
+        //Téléchargement de l'image : 
+        
+        let urlToDownload = NSURL(string: movies[indexPath.row]["poster"] as! String);
+        let urlRequest = NSURLRequest(URL: urlToDownload!);
+        
+        NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response, data, error) -> Void in
+            
+            if error != nil{
+                print(error)
+            }else{
+                let image = UIImage(data: data!);
+                cell.moviePoster.image = image;
+            }
+        }
+        
+        
+        
+        
+        
         let fullDate: String = self.movies[indexPath.row]["release_date"] as! String
         var fullDateParts = fullDate.componentsSeparatedByString("-")
         
