@@ -16,8 +16,22 @@ class ShowViewController: UIViewController {
     var localMovie:AnyObject = "";
     var local = true;
     
+    @IBOutlet var scrollViewContrainer: UIView!
+    @IBOutlet var scrollViewConstraints: NSLayoutConstraint!
+    
+    @IBOutlet var movieCover: UIImageView!
+    @IBOutlet var titleView: UIView!
     @IBOutlet var movieTitle: UILabel!
     @IBOutlet var movieType: UILabel!
+    @IBOutlet var resumeView: UIView!
+    @IBOutlet var moviePoster: UIImageView!
+    @IBOutlet var movieResume: UILabel!
+    @IBOutlet var infoView: UIView!
+    @IBOutlet var movieReal: UILabel!
+    @IBOutlet var movieLenght: UILabel!
+    
+    
+    
     
     
     
@@ -126,8 +140,24 @@ class ShowViewController: UIViewController {
     
     func setMovie(){
         
-        movieTitle.text = "Un titre de film plutot long pour ce que c'est";
+        movieTitle.text = "Spectre (2015)";
         movieType.text = "Action & espionnage";
+        movieResume.text = "Un message cryptique venu tout droit de son passé pousse Bond à enquêter sur une sinistre organisation. Alors que M affronte une tempête politique pour que les services secrets puissent continuer à opérer, Bond s'échine à révéler la terrible vérité derrière... le Spectre."
+        movieReal.text = "Sam Mendez";
+        movieLenght.text = "150 minutes";
+        
+        setScrollHeight()
+        
+    }
+    
+    func setScrollHeight(){
+
+        let height1 = movieCover.frame.height
+        let height2 = titleView.frame.height
+        let height3 = resumeView.frame.height
+        let height4 = infoView.frame.height
+        let scrollHeight = height1 + height2 + height3 + height4
+        scrollViewConstraints.constant = scrollHeight + 100;
     }
     
     func makeBackground(){

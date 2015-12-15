@@ -833,8 +833,18 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="568"/>
                     <connections>
+                        <outlet property="infoView" destination="teo-wj-YEu" id="QE5-sE-OL9"/>
+                        <outlet property="movieCover" destination="GnE-HC-XPa" id="SWt-Gn-ftr"/>
+                        <outlet property="movieLenght" destination="1JS-Dv-lG0" id="9nQ-Rm-AVP"/>
+                        <outlet property="moviePoster" destination="XKA-Zv-Xgg" id="cAn-R0-zke"/>
+                        <outlet property="movieReal" destination="y9W-OG-qGF" id="Xok-Fe-aUK"/>
+                        <outlet property="movieResume" destination="jYN-8Z-egg" id="5D4-d4-X2z"/>
                         <outlet property="movieTitle" destination="vm9-G5-6xI" id="1u1-Dd-T51"/>
                         <outlet property="movieType" destination="VnR-WB-uwN" id="dAs-sF-8HB"/>
+                        <outlet property="resumeView" destination="bv0-Oy-b0g" id="ucP-xO-q8l"/>
+                        <outlet property="scrollViewConstraints" destination="B4f-hW-m0Z" id="Gp8-JI-yuO"/>
+                        <outlet property="scrollViewContrainer" destination="1ju-oQ-uDM" id="GBF-kd-Xm5"/>
+                        <outlet property="titleView" destination="Nfn-tG-RYL" id="9zz-pr-xKz"/>
                         <segue destination="6VT-Wf-hXf" kind="show" identifier="backToList" id="IQt-RV-mZ5"/>
                     </connections>
                 </viewController>
@@ -1082,9 +1092,9 @@
         <image name="searchIcon" width="27" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Aoq-cq-m65"/>
-        <segue reference="FhA-2p-m0y"/>
-        <segue reference="mz4-Qp-aoH"/>
+        <segue reference="IQt-RV-mZ5"/>
         <segue reference="EAW-KU-ueL"/>
+        <segue reference="k4c-B9-S6g"/>
+        <segue reference="nNv-QH-B0z"/>
     </inferredMetricsTieBreakers>
 </document>
