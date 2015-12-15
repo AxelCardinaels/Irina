@@ -161,9 +161,9 @@ class irinaApi {
 
 func addBlurEffect(view:UIViewController) {
     
-    view.navigationController!.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-    view.navigationController!.navigationBar.shadowImage = UIImage()
-    view.navigationController!.navigationBar.translucent = true
+    //view.navigationController!.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+    //view.navigationController!.navigationBar.shadowImage = UIImage()
+    //view.navigationController!.navigationBar.translucent = true
 }
 
 var irina = irinaApi();

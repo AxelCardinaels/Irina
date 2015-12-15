@@ -16,6 +16,10 @@ class ShowViewController: UIViewController {
     var localMovie:AnyObject = "";
     var local = true;
     
+    @IBOutlet var movieTitle: UILabel!
+    @IBOutlet var movieType: UILabel!
+    
+    
     
     func makeAddButton(){
         let addButton : UIBarButtonItem = UIBarButtonItem(title: "À regarder", style: UIBarButtonItemStyle.Plain, target: self, action: "addMovie")
@@ -30,6 +34,17 @@ class ShowViewController: UIViewController {
     func addMovie(){
         
         let newMovie = NSEntityDescription.insertNewObjectForEntityForName("Movie", inManagedObjectContext: context) ;
+        
+        //var documentsDirectory:String?
+        //var paths:[AnyObject] = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
+        
+        //if paths.count > 0 {
+          //  documentsDirectory = paths[0] as? String
+            //var savePath = documentsDirectory! + "\(movie["id"] as! String).jpg"
+            //NSFileManager.defaultManager().createFileAtPath(savePath, contents: data, attributes: nil)
+        //}
+        
+        
         
         let genres = movie["genres"] as! NSArray
         
@@ -111,7 +126,17 @@ class ShowViewController: UIViewController {
     
     func setMovie(){
         
+        movieTitle.text = "Un titre de film plutot long pour ce que c'est";
+        movieType.text = "Action & espionnage";
+    }
+    
+    func makeBackground(){
+        let backgroundImage = UIImage(named : "BackgroundDetail");
+        let backgroundImageView:UIImageView = UIImageView.init(frame: self.view.frame)
+        backgroundImageView.image = backgroundImage
+        backgroundImageView.alpha = 0.15;
         
+        self.view.insertSubview(backgroundImageView, atIndex: 0);
     }
     
     override func viewDidLoad() {
@@ -124,8 +149,6 @@ class ShowViewController: UIViewController {
                 
                 if (data != nil) {
                     self.movie = data
-                    
-                    
                 } else {
                     print("api.showMovie failed")
                     print(error)
@@ -133,8 +156,6 @@ class ShowViewController: UIViewController {
             })
             
             irina.showLocalMovie(idToShow, completionHandler: { (data, error) -> Void in
-                
-                
                 
                 if data as! NSObject == 0 {
                     
@@ -148,20 +169,17 @@ class ShowViewController: UIViewController {
             })
             
             
-            
-            
-            
         }else{
             irina.showLocalMovie(idToShow, completionHandler: { (data, error) -> Void in
                 self.localMovie = data
-                
-                
                 self.setMovie();
                 
                 
             })
             makeRemoveButton();
         }
+        
+        makeBackground();
         
     }
     
