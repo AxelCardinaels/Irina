@@ -29,6 +29,7 @@ class ShowViewController: UIViewController {
     @IBOutlet var infoView: UIView!
     @IBOutlet var movieReal: UILabel!
     @IBOutlet var movieLenght: UILabel!
+    @IBOutlet var movieRate: UILabel!
     
     
     
@@ -145,6 +146,7 @@ class ShowViewController: UIViewController {
         movieResume.text = "Un message cryptique venu tout droit de son passé pousse Bond à enquêter sur une sinistre organisation. Alors que M affronte une tempête politique pour que les services secrets puissent continuer à opérer, Bond s'échine à révéler la terrible vérité derrière... le Spectre."
         movieReal.text = "Sam Mendez";
         movieLenght.text = "150 minutes";
+        movieRate.text = "7/10";
         
         setScrollHeight()
         
@@ -157,7 +159,7 @@ class ShowViewController: UIViewController {
         let height3 = resumeView.frame.height
         let height4 = infoView.frame.height
         let scrollHeight = height1 + height2 + height3 + height4
-        scrollViewConstraints.constant = scrollHeight + 100;
+        scrollViewConstraints.constant = scrollHeight + 120;
     }
     
     func makeBackground(){
@@ -165,8 +167,12 @@ class ShowViewController: UIViewController {
         let backgroundImageView:UIImageView = UIImageView.init(frame: self.view.frame)
         backgroundImageView.image = backgroundImage
         backgroundImageView.alpha = 0.15;
-        
         self.view.insertSubview(backgroundImageView, atIndex: 0);
+        
+        moviePoster.layer.shadowColor = UIColor.blackColor().CGColor
+        moviePoster.layer.shadowOpacity = 1
+        moviePoster.layer.shadowOffset = CGSize(width: 2, height: 2)
+        moviePoster.layer.shadowRadius = 5
     }
     
     override func viewDidLoad() {
