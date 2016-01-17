@@ -54,9 +54,9 @@ class ShowViewController: UIViewController {
         //var paths:[AnyObject] = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
         
         //if paths.count > 0 {
-          //  documentsDirectory = paths[0] as? String
-            //var savePath = documentsDirectory! + "\(movie["id"] as! String).jpg"
-            //NSFileManager.defaultManager().createFileAtPath(savePath, contents: data, attributes: nil)
+        //  documentsDirectory = paths[0] as? String
+        //var savePath = documentsDirectory! + "\(movie["id"] as! String).jpg"
+        //NSFileManager.defaultManager().createFileAtPath(savePath, contents: data, attributes: nil)
         //}
         
         
@@ -139,7 +139,7 @@ class ShowViewController: UIViewController {
         
     }
     
-    func setMovie(){
+    func setLocalMovie(){
         
         movieTitle.text = "Spectre (2015)";
         movieType.text = "Action & espionnage";
@@ -148,12 +148,74 @@ class ShowViewController: UIViewController {
         movieLenght.text = "150 minutes";
         movieRate.text = "7/10";
         
-        setScrollHeight()
+        dispatch_async(dispatch_get_main_queue(), {
+            self.setScrollHeight()
+        })
+        
+    }
+    
+    func setOnlineMovie(){
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            
+            let fullDate: String = self.movie["release_date"] as! String
+            var fullDateParts = fullDate.componentsSeparatedByString("-")
+            
+            if fullDateParts[0] == ""{
+                self.movieTitle.text = self.movie["title"] as? String
+            }else{
+                self.movieTitle.text = "\((self.movie["title"] as? String)!) (\(fullDateParts[0]))"
+            }
+            
+            let genres = self.movie["genres"] as! NSArray
+            if genres.count == 0{
+                self.movieType.text = "Pas de genre";
+            }
+            
+            if genres.count == 1 {
+                self.movieType.text = genres[0] as? String;
+            }
+            
+            if genres.count > 1{
+                self.movieType.text = "\(genres[0] as! String) & \(genres[1] as! String) ";
+            }
+            
+            let resume = self.movie["synopsis"] as? String;
+            
+            if resume == ""{
+                self.movieResume.text = "Désolé, mais nous n'avons malheureusement pas trouver de résumé pour ce film !";
+            }else{
+                self.movieResume.text = resume
+            }
+            
+            let real = self.movie["director"] as! String;
+            
+            if real == ""{
+                self.movieReal.text = "Non renseigné";
+            }else{
+                self.movieReal.text = real;
+            }
+            
+            
+            let notes = self.movie["notes"] as! NSDictionary;
+            let note = notes["mean"] as! NSString;
+            let noteMiddle = note
+            let noteFull = ((noteMiddle as NSString).floatValue)*2
+            let noteShort = (NSString(format: "%.01f", noteFull))
+            self.movieRate.text = "\(noteShort)/10";
+            
+            let length = self.movie["length"] as? NSString;
+            let lengthNumber = length!.intValue
+            self.movieLenght.text = "\(lengthNumber/60) minutes";
+            
+            self.setScrollHeight()
+        })
+        
         
     }
     
     func setScrollHeight(){
-
+        
         let height1 = movieCover.frame.height
         let height2 = titleView.frame.height
         let height3 = resumeView.frame.height
@@ -185,6 +247,7 @@ class ShowViewController: UIViewController {
                 
                 if (data != nil) {
                     self.movie = data
+                    self.setOnlineMovie()
                 } else {
                     print("api.showMovie failed")
                     print(error)
@@ -197,9 +260,10 @@ class ShowViewController: UIViewController {
                     
                     self.makeAddButton()
                 } else {
-                     self.localMovie = data
+                    self.localMovie = data
+                    self.setLocalMovie();
                     self.makeRemoveButton()
-                   
+                    
                 }
                 
             })
@@ -208,9 +272,7 @@ class ShowViewController: UIViewController {
         }else{
             irina.showLocalMovie(idToShow, completionHandler: { (data, error) -> Void in
                 self.localMovie = data
-                self.setMovie();
-                
-                
+                self.setLocalMovie();
             })
             makeRemoveButton();
         }
