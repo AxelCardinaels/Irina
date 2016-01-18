@@ -16,6 +16,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UISearchBarDe
     var movies: NSMutableArray = [];
     var selectedMovie = NSDictionary();
     var searchBar = UISearchBar()
+    var imageToTransmit = UIImageView();
+    var titleToTransmit = UILabel();
+    var dateToTransmit =  UILabel();
+    var noteToTransmit =  UILabel();
+    var genreToTransmit =  UILabel();
     
     
     //Mise en place de l'interface quand on clique sur la barre de recherche
@@ -130,7 +135,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UISearchBarDe
         let cell = tableView.dequeueReusableCellWithIdentifier("movieCell", forIndexPath: indexPath) as! MovieTableViewCell
         
         
-        //Téléchargement de l'image : 
+        //Téléchargement de l'image :
         
         let urlToDownload = NSURL(string: movies[indexPath.row]["poster"] as! String);
         let urlRequest = NSURLRequest(URL: urlToDownload!);
@@ -144,9 +149,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UISearchBarDe
                 cell.moviePoster.image = image;
             }
         }
-        
-        
-        
         
         
         let fullDate: String = self.movies[indexPath.row]["release_date"] as! String
@@ -217,6 +219,22 @@ class SearchViewController: UIViewController, UITableViewDelegate, UISearchBarDe
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         selectedMovie = movies[indexPath.row] as! NSDictionary
+        
+        let indexPath = tableView.indexPathForSelectedRow
+        let currentCell = tableView.cellForRowAtIndexPath(indexPath!)! as UITableViewCell
+        
+        imageToTransmit = currentCell.valueForKey("moviePoster") as! UIImageView;
+        
+        let actualMovie = self.movies[indexPath!.row]["title"] as? NSString;
+        titleToTransmit.text = "\(actualMovie!)"
+        
+        let fullDate: String = self.movies[indexPath!.row]["release_date"] as! String
+        let fullDateParts = fullDate.componentsSeparatedByString("-")
+        dateToTransmit.text = "\(fullDateParts[0])"
+        
+        noteToTransmit = currentCell.valueForKey("movieRate") as! UILabel;
+        genreToTransmit = currentCell.valueForKey("movieType") as! UILabel;
+        
         performSegueWithIdentifier("showMovie", sender: AnyObject?())
     }
     
@@ -226,6 +244,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UISearchBarDe
             let secondView: ShowViewController = segue.destinationViewController as! ShowViewController
             
             secondView.idToShow = (selectedMovie["id"] as? Int)!;
+            secondView.posterToShow = imageToTransmit;
+            secondView.titleToShow = titleToTransmit.text!;
+            secondView.dateToShow = dateToTransmit.text!;
+            secondView.noteToShow = noteToTransmit.text!;
+            secondView.genreToShow = genreToTransmit.text!;
             secondView.local = false;
             
             

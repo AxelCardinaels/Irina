@@ -15,6 +15,12 @@ class ShowViewController: UIViewController {
     var movie = NSDictionary();
     var localMovie:AnyObject = "";
     var local = true;
+    var titleToShow = String();
+    var dateToShow = String();
+    var noteToShow = String();
+    var genreToShow = String();
+    var posterToShow = UIImageView();
+    
     
     @IBOutlet var scrollViewContrainer: UIView!
     @IBOutlet var scrollViewConstraints: NSLayoutConstraint!
@@ -30,9 +36,6 @@ class ShowViewController: UIViewController {
     @IBOutlet var movieReal: UILabel!
     @IBOutlet var movieLenght: UILabel!
     @IBOutlet var movieRate: UILabel!
-    
-    
-    
     
     
     
@@ -158,55 +161,63 @@ class ShowViewController: UIViewController {
         
         dispatch_async(dispatch_get_main_queue(), {
             
-            let fullDate: String = self.movie["release_date"] as! String
-            var fullDateParts = fullDate.componentsSeparatedByString("-")
+            //Téléchargement de la cover :
             
-            if fullDateParts[0] == ""{
-                self.movieTitle.text = self.movie["title"] as? String
+            let urlString = self.movie["backdrop"] as? String;
+            
+            if urlString == nil || urlString == ""{
+                print("no cover")
             }else{
-                self.movieTitle.text = "\((self.movie["title"] as? String)!) (\(fullDateParts[0]))"
+                let urlToDownload = NSURL(string: urlString!);
+                let urlRequest = NSURLRequest(URL: urlToDownload!);
+                
+                NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response, data, error) -> Void in
+                    
+                    if error != nil{
+                        print(error)
+                    }else{
+                        let image = UIImage(data: data!);
+                        self.movieCover.image = image;
+                    }
+                }
+                
+                
             }
             
-            let genres = self.movie["genres"] as! NSArray
-            if genres.count == 0{
-                self.movieType.text = "Pas de genre";
-            }
             
-            if genres.count == 1 {
-                self.movieType.text = genres[0] as? String;
-            }
             
-            if genres.count > 1{
-                self.movieType.text = "\(genres[0] as! String) & \(genres[1] as! String) ";
-            }
             
-            let resume = self.movie["synopsis"] as? String;
+            self.movieTitle.text = "\(self.titleToShow) (\(self.dateToShow))";
+            self.movieType.text = self.genreToShow;
+            self.movieRate.text = self.noteToShow;
             
-            if resume == ""{
+            if let resume = self.movie["synopsis"]{
+                if (resume as! String) == ""{
+                    self.movieResume.text = "Désolé, mais nous n'avons malheureusement pas trouver de résumé pour ce film !";
+                }else{
+                    self.movieResume.text = (resume as! String)
+                }
+                
+            }else{
                 self.movieResume.text = "Désolé, mais nous n'avons malheureusement pas trouver de résumé pour ce film !";
-            }else{
-                self.movieResume.text = resume
             }
             
-            let real = self.movie["director"] as! String;
             
-            if real == ""{
+            let real = self.movie["director"] as? String;
+            
+            if real == nil || real == ""{
                 self.movieReal.text = "Non renseigné";
             }else{
                 self.movieReal.text = real;
+                
             }
             
-            
-            let notes = self.movie["notes"] as! NSDictionary;
-            let note = notes["mean"] as! NSString;
-            let noteMiddle = note
-            let noteFull = ((noteMiddle as NSString).floatValue)*2
-            let noteShort = (NSString(format: "%.01f", noteFull))
-            self.movieRate.text = "\(noteShort)/10";
             
             let length = self.movie["length"] as? NSString;
             let lengthNumber = length!.intValue
             self.movieLenght.text = "\(lengthNumber/60) minutes";
+            self.moviePoster.image = self.posterToShow.image;
+            
             
             self.setScrollHeight()
         })
@@ -225,10 +236,9 @@ class ShowViewController: UIViewController {
     }
     
     func makeBackground(){
-        let backgroundImage = UIImage(named : "BackgroundDetail");
         let backgroundImageView:UIImageView = UIImageView.init(frame: self.view.frame)
-        backgroundImageView.image = backgroundImage
-        backgroundImageView.alpha = 0.15;
+        backgroundImageView.image = posterToShow.image;
+        backgroundImageView.alpha = 0.06;
         self.view.insertSubview(backgroundImageView, atIndex: 0);
         
         moviePoster.layer.shadowColor = UIColor.blackColor().CGColor
